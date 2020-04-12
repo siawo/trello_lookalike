@@ -1,0 +1,21 @@
+html {
+  box-sizing: border-box;
+}
+.card {
+  max-width: 200px;
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 2px;
+}
+.editable-area {
+    max-height: 38px;
+    min-height: 19px;
+    overflow-y: scroll;
+    outline: none;
+}
+.borad-layout {
+  display: grid;
+  grid-template-rows: max-content auto;
+}
