@@ -8,14 +8,25 @@ html {
   border: 1px solid black;
   border-radius: 2px;
   padding: 2px;
+	background-color: #ffffff;
 }
 .editable-area {
-    max-height: 38px;
-    min-height: 19px;
-    overflow-y: scroll;
-    outline: none;
+  max-height: 38px;
+  min-height: 19px;
+  overflow-y: scroll;
+  outline: none;
 }
-.borad-layout {
+.list {
+	display: grid;
+	grid-auto-rows: auto;
+	row-gap: 10px;
+	width: 200px;
+	padding: 12px 6px;
+	background-color: #ebecf0;
+	border-radius: 3px;
+}
+
+/* .borad-layout {
   display: grid;
   grid-template-rows: max-content auto;
-}
+} */

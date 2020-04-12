@@ -1,5 +1,5 @@
 class Card {
-	constructor(str = 'hello') {
+	constructor(str = '') {
 		// create element
 		let container = this.container = document.createElement('div'),
 			editableDiv = this.editableDiv = document.createElement('div'),
@@ -24,7 +24,6 @@ class Card {
 		editSign.appendChild(img);
 		container.appendChild(editableDiv);
 		container.appendChild(editSign);
-		document.body.appendChild(container);
 
 		// add events
 		img.addEventListener('click', () =>  this.enableEditing());
@@ -40,7 +39,8 @@ class Card {
 		this.editableDiv.setAttribute('contenteditable', false);
 		this.container.setAttribute('draggable', true);
 	}
-
+	getCard() {
+		return this.container;
+	}
 }
-const card = new Card();
-export default card;
+export default Card;
