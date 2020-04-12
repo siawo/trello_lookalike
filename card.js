@@ -1,3 +1,9 @@
+function uuidv4() {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		return v.toString(16);
+	});
+}
 class Card {
 	constructor(str = '') {
 		// create element
@@ -13,6 +19,7 @@ class Card {
 		editSign.classList.add('edit-sign');
 
 		container.setAttribute('draggable', true);
+		container.setAttribute('id', uuidv4());
 		img.setAttribute('src', './edit.png');
 		img.setAttribute('height', '15px');
 		img.setAttribute('width', '15px');
@@ -26,10 +33,11 @@ class Card {
 		container.appendChild(editSign);
 
 		// add events
-		img.addEventListener('click', () =>  this.enableEditing());
-		editableDiv.addEventListener('blur', () =>  this.disableEditing());
+		img.addEventListener('click', () => this.enableEditing());
+		editableDiv.addEventListener('blur', () => this.disableEditing());
 		container.addEventListener('mouseover', () => editSign.style.display = 'block');
 		container.addEventListener('mouseout', () => editSign.style.display = 'none');
+		container.addEventListener('dragstart', (e) => this.dragStart(e));
 	}
 	enableEditing() {
 		this.editableDiv.setAttribute('contenteditable', true);
@@ -41,6 +49,12 @@ class Card {
 	}
 	getCard() {
 		return this.container;
+	}
+	removeCard() {
+		this.container.remove();
+	}
+	dragStart(e) {
+		e.dataTransfer.setData("text/plain", this.container.getAttribute('id'));
 	}
 }
 export default Card;
