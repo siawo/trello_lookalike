@@ -9,12 +9,17 @@ class Board {
 		}
 		this.lists = [];
 		let container = this.container = document.createElement('div'),
+			boardLists = this.boardLists = document.createElement('div'),
 			titleEle = this.titleEle = document.createElement('div'),
 			titleText = this.titleText = document.createTextNode(json.title),
 			addListEle = this.addListEle = document.createElement('div'),
 			addListText;
+
+		titleEle.setAttribute('contenteditable', true);
+
 		container.classList.add('board-layout');
-		titleEle.classList.add('title');
+		boardLists.classList.add('board-lists');
+		titleEle.classList.add('board-title');
 		addListEle.classList.add('add-list');
 
 		if (Array.isArray(json.lists)) {
@@ -32,14 +37,15 @@ class Board {
 
 		titleEle.appendChild(titleText);
 		addListEle.appendChild(addListText);
+		boardLists.appendChild(addListEle);
 		container.appendChild(titleEle);
-		container.appendChild(addListEle);
+		container.appendChild(boardLists);
 		document.body.appendChild(container);
 	}
 	addList(obj) {
 		const list = new List(obj);
 		this.lists.push(list);
-		this.container.appendChild(list.getlist());
+		this.boardLists.insertBefore(list.getlist(), this.boardLists.lastChild);
 	}
 	removeList() {
 
