@@ -9,7 +9,8 @@ class Card {
 			editableDiv = this.editableDiv = document.createElement('div'),
 			editSign = this.editSign = document.createElement('div'),
 			textNode = this.textNode = document.createTextNode(info.content || ''),
-			img = this.editImage = document.createElement('img');
+			editImg = this.editImage = document.createElement('img'),
+			xImg = this.editImage = document.createElement('img');
 
 		// add classes
 		container.classList.add('card');
@@ -19,25 +20,38 @@ class Card {
 		// setting the required attributes
 		container.setAttribute('draggable', true);
 		container.setAttribute('id', getId());
-		img.setAttribute('src', './assets/image/edit.png');
-		img.setAttribute('height', '15px');
-		img.setAttribute('width', '15px');
+		editImg.setAttribute('src', './assets/image/edit.png');
+		editImg.setAttribute('height', '10px');
+		editImg.setAttribute('width', '10px');
+		xImg.setAttribute('src', './assets/image/x.png');
+		xImg.setAttribute('height', '10px');
+		xImg.setAttribute('width', '10px');
 		// stopped default dragging of image
-		img.setAttribute('draggable', 'false');
+		editImg.setAttribute('draggable', 'false');
+		xImg.setAttribute('draggable', 'false');
 
 		editSign.style.display = 'none';
+		xImg.style.display = 'none';
 
 		//attcah the childrens
 		editableDiv.appendChild(textNode);
-		editSign.appendChild(img);
+		editSign.appendChild(editImg);
+		editSign.appendChild(xImg);
 		container.appendChild(editableDiv);
 		container.appendChild(editSign);
 
 		// add events
-		img.addEventListener('click', () => this.enableEditing());
+		editImg.addEventListener('click', () => this.enableEditing());
+		xImg.addEventListener('click', () => this.removeCard());
 		editableDiv.addEventListener('blur', () => this.disableEditing());
-		container.addEventListener('mouseover', () => editSign.style.display = 'block');
-		container.addEventListener('mouseout', () => editSign.style.display = 'none');
+		container.addEventListener('mouseover', () => {
+			editSign.style.display = 'inline';
+			xImg.style.display = 'inline';
+		});
+		container.addEventListener('mouseout', () => {
+			editSign.style.display = 'none';
+			xImg.style.display = 'none';
+		});
 		container.addEventListener('dragstart', (e) => this.dragStart(e));
 	}
 
@@ -70,6 +84,13 @@ class Card {
 	 */
 	dragStart(e) {
 		e.dataTransfer.setData("text/plain", this.container.getAttribute('id'));
+	}
+
+	/**
+	 * api to remove container from dom
+	 */
+	removeCard () {
+		this.container.remove();
 	}
 }
 export default Card;
