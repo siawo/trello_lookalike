@@ -1,20 +1,9 @@
-import { isObject } from './utils.js';
+import { isObject, updateText } from './utils.js';
 import Card from './card.js';
 
 const noCardString = '+ Add a card',
 	addedCardString = '+ Add another card',
-	updateAddCardText = (container) => {
-		let currText = container.lastChild.innerText;
-		if (container.childNodes.length > 2) {
-			if (currText !== addedCardString) {
-				container.lastChild.innerText = addedCardString;
-			}
-		} else {
-			if (currText !== noCardString) {
-				container.lastChild.innerText = noCardString;
-			}
-		}
-	}
+	defaultElementCount = 2;
 
 class List {
 	constructor(json = {
@@ -28,7 +17,9 @@ class List {
 			header = this.header = document.createElement('div'),
 			addCardEle = this.addCardEle = document.createElement('div'),
 			headerTextEle = this.headerTextEle = document.createTextNode(json.header || 'To Do'),
-			addCardText = this.addCardText = document.createTextNode(noCardString);
+			addCardText = this.addCardText = document.createElement('p');
+
+		addCardText.innerText = noCardString;
 
 		listContainer.classList.add('list-container');
 		container.classList.add('list');
@@ -60,7 +51,7 @@ class List {
 	}) {
 		let card = new Card(info);
 		this.container.insertBefore(card.getCard(), this.container.lastChild);
-		updateAddCardText(this.container);
+		updateText(this.container, noCardString, addedCardString, defaultElementCount);
 	}
 	dragOver(e) {
 		e.preventDefault();
@@ -98,8 +89,8 @@ class List {
 		} else {
 			targetList.insertBefore(sourceEle, targetList.lastChild);
 		}
-		updateAddCardText(sourceList);
-		updateAddCardText(targetList);
+		updateText(sourceList, noCardString, addedCardString, defaultElementCount);
+		updateText(targetList, noCardString, addedCardString, defaultElementCount);
 	}
 }
 export default List;

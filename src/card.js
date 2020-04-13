@@ -1,4 +1,4 @@
-import { uuidv4 } from './utils.js';
+import { getId } from './utils.js';
 class Card {
 	constructor(info = {
 		content: ''
@@ -16,7 +16,7 @@ class Card {
 		editSign.classList.add('edit-sign');
 
 		container.setAttribute('draggable', true);
-		container.setAttribute('id', uuidv4());
+		container.setAttribute('id', getId());
 		img.setAttribute('src', './assets/image/edit.png');
 		img.setAttribute('height', '15px');
 		img.setAttribute('width', '15px');

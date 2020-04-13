@@ -1,5 +1,9 @@
-import { isObject } from './utils.js';
+import { isObject, updateText } from './utils.js';
 import List from './list.js';
+
+const noListString = '+ Add a list',
+	addedListString = '+ Add another list',
+	defaultElementCount = 1;
 class Board {
 	constructor(json = {
 		title: 'Welcome Board'
@@ -7,15 +11,15 @@ class Board {
 		if (!isObject(json)) {
 			new Error('Input should be a object');
 		}
-		this.lists = [];
 		let container = this.container = document.createElement('div'),
 			boardLists = this.boardLists = document.createElement('div'),
 			titleEle = this.titleEle = document.createElement('div'),
 			titleText = this.titleText = document.createTextNode(json.title),
 			addListEle = this.addListEle = document.createElement('div'),
-			addListText = this.addListText = document.createTextNode('+ Add a list');
+			addListText = this.addListText = document.createElement('p');
 
 		titleEle.setAttribute('contenteditable', true);
+		addListText.innerText = noListString;
 
 		container.classList.add('board-layout');
 		boardLists.classList.add('board-lists');
@@ -46,8 +50,8 @@ class Board {
 	}
 	addList(obj) {
 		const list = new List(obj);
-		this.lists.push(list);
 		this.boardLists.insertBefore(list.getlist(), this.boardLists.lastChild);
+		updateText(this.boardLists, noListString, addedListString, defaultElementCount);
 	}
 	removeList() {
 
