@@ -63,7 +63,7 @@ html {
 
 .list-header-container {
   display: grid;
-  grid-template-columns: 1fr 10px;
+  grid-template-columns: 1fr 15px;
 }
 
 .list-header {

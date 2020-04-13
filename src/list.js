@@ -40,6 +40,7 @@ class List {
 		
 		xImg.style.display = 'none';
 		xImg.style.cursor = 'pointer';
+		xImg.style.marginLeft = '5px';
 
 		// connet the dom
 		header.appendChild(headerTextEle);
