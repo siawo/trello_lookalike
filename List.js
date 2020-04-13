@@ -1,11 +1,17 @@
+import { isObject } from './utils.js';
 import Card from './card.js';
 
 class List {
-	constructor(headerText = 'To Do') {
+	constructor(json = {
+		header: 'To Do'
+	}) {
+		if (!isObject(json)) {
+			throw new Error('List input shoudd be an Object');
+		}
 		let container = this.conatiner = document.createElement('div'),
 			header = this.header = document.createElement('div'),
 			addCardEle = this.addCardEle = document.createElement('div'),
-			headerTextEle = this.headerTextEle = document.createTextNode(headerText),
+			headerTextEle = this.headerTextEle = document.createTextNode(json.header),
 			addCardText = this.addCardText = document.createTextNode('+ Add another card');
 
 		container.classList.add('list');
@@ -22,8 +28,6 @@ class List {
 		addCardEle.addEventListener('click', () => this.addCard());
 		container.addEventListener('dragover', (e) => this.dragOver(e));
 		container.addEventListener('drop', (e) => this.drop(e));
-
-		document.body.appendChild(container);
 	}
 	addCard(info = '') {
 		let card = new Card(info);
