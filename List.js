@@ -37,8 +37,8 @@ class List {
 		}
 
 		addCardEle.addEventListener('click', () => this.addCard());
-		container.addEventListener('dragover', (e) => this.dragOver(e));
-		container.addEventListener('drop', (e) => this.drop(e));
+		listContainer.addEventListener('dragover', (e) => this.dragOver(e));
+		listContainer.addEventListener('drop', (e) => this.drop(e));
 	}
 	addCard(info = {
 		content: ''
@@ -59,7 +59,9 @@ class List {
 			targetEle = e.target,
 			targetList,
 			targetCrad;
-		if (targetEle.className === 'list-header' || targetEle.className === 'card-add') {
+		if (targetEle.className === 'list-container') {
+			targetList = targetEle.firstChild;
+		} else	if (targetEle.className === 'list-header' || targetEle.className === 'card-add') {
 			targetList = targetEle.parentElement;
 		} else if (targetEle.className === 'list') {
 			targetList = targetEle;

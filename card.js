@@ -20,6 +20,8 @@ class Card {
 		img.setAttribute('src', './edit.png');
 		img.setAttribute('height', '15px');
 		img.setAttribute('width', '15px');
+		// stopped default dragging of image
+		img.setAttribute('draggable', 'false');
 
 		editSign.style.display = 'none';
 

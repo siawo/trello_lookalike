@@ -30,6 +30,10 @@ class Board {
 		container.appendChild(titleEle);
 		container.appendChild(boardLists);
 
+		// stopped drop effect in title
+		titleEle.addEventListener('drop', e => e.preventDefault());
+		titleEle.addEventListener('dragover', e => e.dataTransfer.effectAllowed = 'none');
+
 		if (Array.isArray(json.lists)) {
 			json.lists.forEach(obj => {
 				if (isObject(obj)) {
