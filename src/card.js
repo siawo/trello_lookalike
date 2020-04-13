@@ -31,6 +31,7 @@ class Card {
 		xImg.setAttribute('draggable', 'false');
 
 		editSign.style.display = 'none';
+		xImg.style.marginLeft = '5px';
 		xImg.style.display = 'none';
 
 		//attcah the childrens
