@@ -1,6 +1,21 @@
 import { isObject } from './utils.js';
 import Card from './card.js';
 
+const noCardString = '+ Add a card',
+	addedCardString = '+ Add another card',
+	updateAddCardText = (container) => {
+		let currText = container.lastChild.innerText;
+		if (container.childNodes.length > 2) {
+			if (currText !== addedCardString) {
+				container.lastChild.innerText = addedCardString;
+			}
+		} else {
+			if (currText !== noCardString) {
+				container.lastChild.innerText = noCardString;
+			}
+		}
+	}
+
 class List {
 	constructor(json = {
 		header: 'To Do'
@@ -9,11 +24,11 @@ class List {
 			throw new Error('List input shoudd be an Object');
 		}
 		let listContainer = this.listContainer = document.createElement('div'),
-			container = this.conatiner = document.createElement('div'),
+			container = this.container = document.createElement('div'),
 			header = this.header = document.createElement('div'),
 			addCardEle = this.addCardEle = document.createElement('div'),
 			headerTextEle = this.headerTextEle = document.createTextNode(json.header || 'To Do'),
-			addCardText = this.addCardText = document.createTextNode('+ Add another card');
+			addCardText = this.addCardText = document.createTextNode(noCardString);
 
 		listContainer.classList.add('list-container');
 		container.classList.add('list');
@@ -44,7 +59,8 @@ class List {
 		content: ''
 	}) {
 		let card = new Card(info);
-		this.conatiner.insertBefore(card.getCard(), this.conatiner.lastChild);
+		this.container.insertBefore(card.getCard(), this.container.lastChild);
+		updateAddCardText(this.container);
 	}
 	dragOver(e) {
 		e.preventDefault();
@@ -61,7 +77,7 @@ class List {
 			targetCrad;
 		if (targetEle.className === 'list-container') {
 			targetList = targetEle.firstChild;
-		} else	if (targetEle.className === 'list-header' || targetEle.className === 'card-add') {
+		} else if (targetEle.className === 'list-header' || targetEle.className === 'card-add') {
 			targetList = targetEle.parentElement;
 		} else if (targetEle.className === 'list') {
 			targetList = targetEle;
@@ -82,6 +98,8 @@ class List {
 		} else {
 			targetList.insertBefore(sourceEle, targetList.lastChild);
 		}
+		updateAddCardText(sourceList);
+		updateAddCardText(targetList);
 	}
 }
 export default List;
