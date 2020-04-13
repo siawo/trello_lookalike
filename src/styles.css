@@ -5,8 +5,9 @@ html {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 /**
-*
+* css for borad class
 **/
+
 .borad-layout {
   display: grid;
   grid-template-rows: auto;
@@ -41,8 +42,9 @@ html {
 }
 
 /**
-*
+* css for list class
 **/
+
 .list-container {
   height: 90vh;
   overflow-y: auto;
@@ -80,7 +82,7 @@ html {
 }
 
 /**
-*
+* css for card class
 **/
 
 .card {
