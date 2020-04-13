@@ -3,14 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Board</title>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Board</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <script type="module">
       import Board from "./board.js";
-      const board = new Board();
+      let data = {
+        title: "Release 0.0.1",
+        lists: [
+          {
+            header: "Design",
+            cards: [
+              {
+                content: "Drop down menu",
+              },
+              {
+                content: "Impact page",
+              },
+              {
+                content: "Pricing page",
+              },
+            ],
+          },
+          {
+            header: "To Do",
+            cards: [
+              {
+                content: "Data connect",
+              },
+              {
+                content: "Dynamic imports",
+              },
+              {
+                content: "Release",
+              },
+            ],
+          },
+          {
+            header: "Development",
+            cards: [
+              {
+                content: "Documentation",
+              },
+              {
+                content: "Team page",
+              }
+            ],
+          },
+          {
+            header: "QA",
+            cards: [
+              {
+                content: "Side panel",
+              }
+            ],
+          },
+          {
+            header: "Ready for release",
+            cards: [
+              {
+                content: "Home page",
+              },
+              {
+                content: "Contacts page",
+              },
+              {
+                content: "About us",
+              },
+            ],
+          },
+          {
+            header: "Done",
+          },
+        ],
+      };
+      const board = new Board(data);
     </script>
   </body>
 </html>

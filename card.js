@@ -1,11 +1,13 @@
 import { uuidv4 } from './utils.js';
 class Card {
-	constructor(str = '') {
+	constructor(info = {
+		content: ''
+	}) {
 		// create element
 		let container = this.container = document.createElement('div'),
 			editableDiv = this.editableDiv = document.createElement('div'),
 			editSign = this.editSign = document.createElement('div'),
-			textNode = this.textNode = document.createTextNode(str),
+			textNode = this.textNode = document.createTextNode(info.content || ''),
 			img = this.editImage = document.createElement('img');
 
 		// add classes

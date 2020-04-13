@@ -11,7 +11,7 @@ class List {
 		let container = this.conatiner = document.createElement('div'),
 			header = this.header = document.createElement('div'),
 			addCardEle = this.addCardEle = document.createElement('div'),
-			headerTextEle = this.headerTextEle = document.createTextNode(json.header),
+			headerTextEle = this.headerTextEle = document.createTextNode(json.header || 'To Do'),
 			addCardText = this.addCardText = document.createTextNode('+ Add another card');
 
 		container.classList.add('list');
@@ -25,13 +25,23 @@ class List {
 		container.appendChild(header);
 		container.appendChild(addCardEle);
 
+		if (Array.isArray(json.cards)) {
+			json.cards.forEach(obj => {
+				if (isObject(obj)) {
+					this.addCard(obj);
+				}
+			});
+		}
+
 		addCardEle.addEventListener('click', () => this.addCard());
 		container.addEventListener('dragover', (e) => this.dragOver(e));
 		container.addEventListener('drop', (e) => this.drop(e));
 	}
-	addCard(info = '') {
+	addCard(info = {
+		content: ''
+	}) {
 		let card = new Card(info);
-		this.conatiner.insertBefore(card.getCard(), this.addCardEle);
+		this.conatiner.insertBefore(card.getCard(), this.conatiner.lastChild);
 	}
 	dragOver(e) {
 		e.preventDefault();
