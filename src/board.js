@@ -63,9 +63,5 @@ class Board {
 		this.boardLists.insertBefore(list.getlist(), this.boardLists.lastChild);
 		updateText(this.boardLists, noListString, addedListString, defaultElementCount);
 	}
-	
-	removeList() {
-
-	}
 }
 export default Board;

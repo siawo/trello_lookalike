@@ -65,13 +65,6 @@ class Card {
 	}
 
 	/**
-	 * api to remove the container  from the dom
-	 */
-	removeCard() {
-		this.container.remove();
-	}
-
-	/**
 	 * api to set the id of the element being dragged
 	 * @param {Object} e drag event 
 	 */
