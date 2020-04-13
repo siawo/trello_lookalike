@@ -1,8 +1,9 @@
 import { getId } from './utils.js';
+/**
+ * class Card
+ */
 class Card {
-	constructor(info = {
-		content: ''
-	}) {
+	constructor(info = { content: '' }) {
 		// create element
 		let container = this.container = document.createElement('div'),
 			editableDiv = this.editableDiv = document.createElement('div'),
@@ -15,6 +16,7 @@ class Card {
 		editableDiv.classList.add('editable-area');
 		editSign.classList.add('edit-sign');
 
+		// setting the required attributes
 		container.setAttribute('draggable', true);
 		container.setAttribute('id', getId());
 		img.setAttribute('src', './assets/image/edit.png');
@@ -38,20 +40,41 @@ class Card {
 		container.addEventListener('mouseout', () => editSign.style.display = 'none');
 		container.addEventListener('dragstart', (e) => this.dragStart(e));
 	}
+
+	/**
+	 * enable the editing and stops dragging
+	 */
 	enableEditing() {
 		this.editableDiv.setAttribute('contenteditable', true);
 		this.container.setAttribute('draggable', false);
 	}
+
+	/**
+	 * disable the editing and stops dragging
+	 */
 	disableEditing() {
 		this.editableDiv.setAttribute('contenteditable', false);
 		this.container.setAttribute('draggable', true);
 	}
+
+	/**
+	 * api to returns the root container of card
+	 */
 	getCard() {
 		return this.container;
 	}
+
+	/**
+	 * api to remove the container  from the dom
+	 */
 	removeCard() {
 		this.container.remove();
 	}
+
+	/**
+	 * api to set the id of the element being dragged
+	 * @param {Object} e drag event 
+	 */
 	dragStart(e) {
 		e.dataTransfer.setData("text/plain", this.container.getAttribute('id'));
 	}

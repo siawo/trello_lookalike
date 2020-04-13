@@ -5,10 +5,12 @@ const noCardString = '+ Add a card',
 	addedCardString = '+ Add another card',
 	defaultElementCount = 2;
 
+/**
+ * class List
+ */
 class List {
-	constructor(json = {
-		header: 'To Do'
-	}) {
+	constructor(json = { header: 'To Do' }) {
+		// throw error if input is not object
 		if (!isObject(json)) {
 			throw new Error('List input shoudd be an Object');
 		}
@@ -21,19 +23,23 @@ class List {
 
 		addCardText.innerText = noCardString;
 
+		// add classes
 		listContainer.classList.add('list-container');
 		container.classList.add('list');
 		header.classList.add('list-header');
 		addCardEle.classList.add('card-add');
 
+		// making the header of the list editable
 		header.setAttribute('contenteditable', true);
 
+		// connet the dom
 		header.appendChild(headerTextEle);
 		addCardEle.appendChild(addCardText);
 		container.appendChild(header);
 		container.appendChild(addCardEle);
 		listContainer.appendChild(container);
 
+		// add cards based on input
 		if (Array.isArray(json.cards)) {
 			json.cards.forEach(obj => {
 				if (isObject(obj)) {
@@ -42,23 +48,38 @@ class List {
 			});
 		}
 
+		// attach event listeners
 		addCardEle.addEventListener('click', () => this.addCard());
 		listContainer.addEventListener('dragover', (e) => this.dragOver(e));
 		listContainer.addEventListener('drop', (e) => this.drop(e));
 	}
-	addCard(info = {
-		content: ''
-	}) {
+
+	/**
+	 * api to create and add card element in dom
+	 * @param {String} info 
+	 */
+	addCard(info = { content: '' }) {
 		let card = new Card(info);
 		this.container.insertBefore(card.getCard(), this.container.lastChild);
 		updateText(this.container, noCardString, addedCardString, defaultElementCount);
 	}
+	/**
+	 * api to prevent default action of Resetting the current drag operation to none
+	 * @param {Object} e event for drag over 
+	 */
 	dragOver(e) {
 		e.preventDefault();
 	}
+	/**
+	 * api to return the root of list container
+	 */
 	getlist() {
 		return this.listContainer;
 	}
+	/**
+	 * api to handle the drop event and move the element in the correct position
+	 * @param {Object} e drop event 
+	 */
 	drop(e) {
 		e.preventDefault();
 		let sourceEle = document.getElementById(e.dataTransfer.getData("text/plain")),
@@ -66,6 +87,7 @@ class List {
 			targetEle = e.target,
 			targetList,
 			targetCrad;
+
 		if (targetEle.className === 'list-container') {
 			targetList = targetEle.firstChild;
 		} else if (targetEle.className === 'list-header' || targetEle.className === 'card-add') {
@@ -76,6 +98,8 @@ class List {
 			targetCrad = e.target.id ? e.target : e.target.parentElement;
 			targetList = targetCrad.parentElement;
 		}
+
+		// position the source element in the drop target
 		if (targetCrad) {
 			if (targetList !== sourceList) {
 				targetList.insertBefore(sourceEle, targetCrad);
@@ -89,6 +113,8 @@ class List {
 		} else {
 			targetList.insertBefore(sourceEle, targetList.lastChild);
 		}
+
+		// update the text of the list
 		updateText(sourceList, noCardString, addedCardString, defaultElementCount);
 		updateText(targetList, noCardString, addedCardString, defaultElementCount);
 	}
