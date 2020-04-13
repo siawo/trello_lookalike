@@ -13,7 +13,7 @@ class Board {
 			titleEle = this.titleEle = document.createElement('div'),
 			titleText = this.titleText = document.createTextNode(json.title),
 			addListEle = this.addListEle = document.createElement('div'),
-			addListText;
+			addListText = this.addListText = document.createTextNode('+ Add a list');
 
 		titleEle.setAttribute('contenteditable', true);
 
@@ -22,17 +22,6 @@ class Board {
 		titleEle.classList.add('board-title');
 		addListEle.classList.add('add-list');
 
-		if (Array.isArray(json.lists)) {
-			json.lists.forEach(obj => {
-				if (isObject(obj)) {
-					this.addList(obj);
-				}
-			});
-		}
-		addListText = this.addListText = document.createTextNode(this.lists.length
-			? '+ Add another list'
-			: '+ Add a list');
-
 		addListEle.addEventListener('click', () => this.addList());
 
 		titleEle.appendChild(titleText);
@@ -40,6 +29,15 @@ class Board {
 		boardLists.appendChild(addListEle);
 		container.appendChild(titleEle);
 		container.appendChild(boardLists);
+
+		if (Array.isArray(json.lists)) {
+			json.lists.forEach(obj => {
+				if (isObject(obj)) {
+					this.addList(obj);
+				}
+			});
+		}
+
 		document.body.appendChild(container);
 	}
 	addList(obj) {

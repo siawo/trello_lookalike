@@ -8,12 +8,14 @@ class List {
 		if (!isObject(json)) {
 			throw new Error('List input shoudd be an Object');
 		}
-		let container = this.conatiner = document.createElement('div'),
+		let listContainer = this.listContainer = document.createElement('div'),
+			container = this.conatiner = document.createElement('div'),
 			header = this.header = document.createElement('div'),
 			addCardEle = this.addCardEle = document.createElement('div'),
 			headerTextEle = this.headerTextEle = document.createTextNode(json.header || 'To Do'),
 			addCardText = this.addCardText = document.createTextNode('+ Add another card');
 
+		listContainer.classList.add('list-container');
 		container.classList.add('list');
 		header.classList.add('list-header');
 		addCardEle.classList.add('card-add');
@@ -24,6 +26,7 @@ class List {
 		addCardEle.appendChild(addCardText);
 		container.appendChild(header);
 		container.appendChild(addCardEle);
+		listContainer.appendChild(container);
 
 		if (Array.isArray(json.cards)) {
 			json.cards.forEach(obj => {
@@ -47,7 +50,7 @@ class List {
 		e.preventDefault();
 	}
 	getlist() {
-		return this.conatiner;
+		return this.listContainer;
 	}
 	drop(e) {
 		e.preventDefault();
