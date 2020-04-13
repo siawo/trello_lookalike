@@ -45,7 +45,7 @@ html {
 **/
 .list-container {
   height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .list {
@@ -90,7 +90,7 @@ html {
 .editable-area {
   max-height: 75px;
   min-height: 19px;
-  overflow-y: scroll;
+  overflow-y: auto;
   outline: none;
 }
 
