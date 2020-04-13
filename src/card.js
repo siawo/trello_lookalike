@@ -17,7 +17,7 @@ class Card {
 
 		container.setAttribute('draggable', true);
 		container.setAttribute('id', uuidv4());
-		img.setAttribute('src', './edit.png');
+		img.setAttribute('src', './assets/image/edit.png');
 		img.setAttribute('height', '15px');
 		img.setAttribute('width', '15px');
 		// stopped default dragging of image
