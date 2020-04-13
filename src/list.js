@@ -16,26 +16,37 @@ class List {
 		}
 		let listContainer = this.listContainer = document.createElement('div'),
 			container = this.container = document.createElement('div'),
+			headerContainer = this.headerContainer = document.createElement('div'),
 			header = this.header = document.createElement('div'),
 			addCardEle = this.addCardEle = document.createElement('div'),
 			headerTextEle = this.headerTextEle = document.createTextNode(json.header || 'To Do'),
-			addCardText = this.addCardText = document.createElement('p');
+			addCardText = this.addCardText = document.createElement('p'),
+			xImg = this.editImage = document.createElement('img');
 
 		addCardText.innerText = noCardString;
 
 		// add classes
 		listContainer.classList.add('list-container');
 		container.classList.add('list');
+		headerContainer.classList.add('list-header-container');
 		header.classList.add('list-header');
 		addCardEle.classList.add('card-add');
 
-		// making the header of the list editable
+		// adding respective attributes
 		header.setAttribute('contenteditable', true);
+		xImg.setAttribute('src', './assets/image/x.png');
+		xImg.setAttribute('height', '10px');
+		xImg.setAttribute('width', '10px');
+		
+		xImg.style.display = 'none';
+		xImg.style.cursor = 'pointer';
 
 		// connet the dom
 		header.appendChild(headerTextEle);
+		headerContainer.appendChild(header);
+		headerContainer.appendChild(xImg);
 		addCardEle.appendChild(addCardText);
-		container.appendChild(header);
+		container.appendChild(headerContainer);
 		container.appendChild(addCardEle);
 		listContainer.appendChild(container);
 
@@ -50,6 +61,9 @@ class List {
 
 		// attach event listeners
 		addCardEle.addEventListener('click', () => this.addCard());
+		xImg.addEventListener('click', () => this.removeList());
+		container.addEventListener('mouseover', () => xImg.style.display = 'block');
+		container.addEventListener('mouseout', () => xImg.style.display = 'none');
 		listContainer.addEventListener('dragover', (e) => this.dragOver(e));
 		listContainer.addEventListener('drop', (e) => this.drop(e));
 	}
@@ -117,6 +131,13 @@ class List {
 		// update the text of the list
 		updateText(sourceList, noCardString, addedCardString, defaultElementCount);
 		updateText(targetList, noCardString, addedCardString, defaultElementCount);
+	}
+
+	/**
+	 * api to remove the list
+	 */
+	removeList () {
+		this.listContainer.remove();
 	}
 }
 export default List;

@@ -59,6 +59,11 @@ html {
   height: min-content;
 }
 
+.list-header-container {
+  display: grid;
+  grid-template-columns: 1fr 10px;
+}
+
 .list-header {
   font-weight: 600px;
   outline: none;
