@@ -1,0 +1,25 @@
+{
+  "name": "trello_lookalike",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "scripts": {
+    "start": "npx webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siawo/trello_lookalike.git"
+  },
+  "keywords": [],
+  "author": "md.owais1994@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siawo/trello_lookalike/issues"
+  },
+  "homepage": "https://github.com/siawo/trello_lookalike#readme"
+}
